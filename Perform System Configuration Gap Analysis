@@ -1,0 +1,16 @@
+Scenario
+As a security team member of Structureality Inc, you are working to improve your organization's security stance. Often the best path to a secure IT infrastructure starts with thorough planning and analysis. You will perform a gap analysis of the current configuration of a system against a security template.
+
+In this lab, you will use security templates to manage a Windows Server configuration, which will entail using the Microsoft Policy Analyzer to perform a security baseline template review and gap analysis.
+
+Understand your environment
+You will be working from a virtual machine named PC10, hosting Windows Server 2019 and functioning as a client.
+
+Objectives
+This activity is designed to test your understanding of and ability to apply content examples in the following CompTIA Security+ objectives:
+
+1.2 Summarize fundamental security concepts.
+3.2 Given a scenario, apply security principles to secure enterprise infrastructure
+4.1 Given a scenario, apply common security techniques to computing resources.
+4.4 Explain security alerting and monitoring concepts and tools.
+5.1 Summarize elements of effective security governance.
