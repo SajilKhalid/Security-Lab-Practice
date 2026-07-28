@@ -1,0 +1,11 @@
+In this lab, I will learn about several types of security controls, including preventive, detective, directive, and corrective.
+
+As a security team member of Structureality Inc, you are working to improve your organization's security stance. This lab focuses on configuring, using or testing the security controls to ensure you understand the nature of the various types of controls. These exercises will facilitate your recommendations on the remediations to resolve security weaknesses. First, you will work with a preventive control, then a detective control. Next, you will work with a directive control and finally, a corrective control.
+
+Understand your environment
+You will be working from a virtual machine named PC10, hosting Windows Server 2019, which serves as a client in this lab environment.
+
+Objectives
+This activity is designed to test your understanding of and ability to apply content examples in the following CompTIA Security+ objectives:
+
+1.1 Compare and contrast various types of security controls.
