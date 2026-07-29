@@ -1,11 +1,120 @@
-In this lab, I will learn about several types of security controls, including preventive, detective, directive, and corrective.
+# Configuring Examples of Security Control Types
 
-As a security team member of Structureality Inc, you are working to improve your organization's security stance. This lab focuses on configuring, using or testing the security controls to ensure you understand the nature of the various types of controls. These exercises will facilitate your recommendations on the remediations to resolve security weaknesses. First, you will work with a preventive control, then a detective control. Next, you will work with a directive control and finally, a corrective control.
+## Objective
 
-Understand your environment
-You will be working from a virtual machine named PC10, hosting Windows Server 2019, which serves as a client in this lab environment.
+Configure and validate multiple security control types in a Windows Server environment by implementing preventive, detective, directive, and corrective controls. This lab demonstrates how different control types work together to reduce risk, monitor activity, guide user behavior, and restore systems to a secure state.
 
-Objectives
-This activity is designed to test your understanding of and ability to apply content examples in the following CompTIA Security+ objectives:
+## Environment
 
-1.1 Compare and contrast various types of security controls.
+- **Platform:** CompTIA CertMaster Labs
+- **Operating System:** Windows Server 2019
+- **Systems Used:**
+  - PC10 (Client)
+  - DC10 (Domain Controller)
+- **Tools & Technologies:**
+  - File Explorer
+  - Server Manager
+  - NTFS & Share Permissions
+  - Local Security Policy
+  - Event Viewer
+  - Windows PowerShell
+  - Windows Registry
+  - SHA-256 File Hashing
+  - Sysinternals NotMyFault
+
+## Lab Overview
+
+This lab explored four categories of security controls by configuring and validating examples of preventive, detective, directive, and corrective controls within a Windows Server environment. Administrative permissions, auditing policies, login warnings, and file integrity verification were implemented to demonstrate how each control type contributes to protecting systems and data.
+
+## Steps Performed
+
+### Preventive Control
+
+A preventive control was implemented to restrict unauthorized access to a network share.
+
+- Verified that a standard user could improperly access the restricted **TOOLS** network share.
+- Modified the share permissions to remove unauthorized access.
+- Confirmed the configuration by verifying that the standard user received an **Access Denied** message when attempting to reconnect.
+
+**TOOLS share accessible before remediation**
+
+![TOOLS share before remediation](./images/preventive-tools-share-before-remediation.png)
+
+**Updated share permissions**
+
+![Updated share permissions](./images/preventive-share-permissions.png)
+
+**Access denied after remediation**
+
+![Access denied after remediation](./images/preventive-access-denied.png)
+
+---
+
+### Detective Control
+
+A detective control was configured to record object access events.
+
+- Enabled **Audit Object Access** within Local Security Policy.
+- Configured auditing for delete operations on the LABFILES directory.
+- Deleted a test folder to generate an audit event.
+- Verified the recorded activity in Event Viewer using Windows Security logs.
+
+**Audit Object Access enabled**
+
+![Audit Object Access enabled](./images/detective-audit-object-access.png)
+
+**File auditing configuration**
+
+![File auditing configuration](./images/detective-file-auditing.png)
+
+**Event Viewer showing object deletion audit**
+
+![Event Viewer showing object deletion audit](./images/detective-event-viewer-4663.png)
+
+---
+
+### Directive Control
+
+A directive control was configured to communicate organizational security requirements before user authentication.
+
+- Used Windows PowerShell to configure a legal notice banner through Windows Registry settings.
+- Signed out of the workstation.
+- Verified that the warning banner appeared before the user could sign in.
+
+**Login warning banner**
+
+![Login warning banner](./images/directive-login-banner.png)
+
+---
+
+### Corrective Control
+
+A corrective control was tested by validating Windows' response to an application failure and by creating a simple PowerShell-based file integrity verification process.
+
+- Triggered a controlled system crash using Sysinternals NotMyFault to observe Windows' built-in recovery mechanism.
+- Generated a SHA-256 hash for a monitored text file.
+- Modified the file to simulate unauthorized changes.
+- Compared the current file hash against the known-good hash.
+- Restored the original file contents after detecting the integrity change.
+- Automated the verification process using PowerShell scripts.
+
+> **Note:** No screenshots were captured for the corrective control portion of the lab.
+
+---
+
+## Results
+
+Successfully configured and validated four distinct security control types within a Windows Server environment.
+
+- Prevented unauthorized access to a restricted network share.
+- Enabled auditing to detect and record file deletion events.
+- Configured a legal login banner to communicate acceptable use requirements.
+- Verified file integrity using SHA-256 hashing and restored modified content through PowerShell-based corrective actions.
+
+## Key Takeaways
+
+- **Preventive controls** stop unauthorized actions before they occur by enforcing security restrictions.
+- **Detective controls** improve visibility by logging and monitoring security-related events.
+- **Directive controls** communicate organizational policies and user responsibilities before access is granted.
+- **Corrective controls** help restore systems or data to a trusted state after an unwanted change is detected.
+- Windows Server provides built-in capabilities for implementing multiple layers of security controls through permissions, auditing, policy settings, and scripting.
