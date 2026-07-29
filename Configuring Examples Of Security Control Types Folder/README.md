@@ -38,15 +38,15 @@ A preventive control was implemented to restrict unauthorized access to a networ
 
 **TOOLS share accessible before remediation**
 
-![TOOLS share before remediation](./images/preventive-tools-share-before-remediation.png)
+![TOOLS share before remediation](./images/tools-share-before-remediation.pn.png)
 
 **Updated share permissions**
 
-![Updated share permissions](./images/preventive-share-permissions.png)
+![Updated share permissions](./images/tools-share-permissions.png)
 
 **Access denied after remediation**
 
-![Access denied after remediation](./images/preventive-access-denied.png)
+![Access denied after remediation](./images/tools-share-access-denied.png.png)
 
 ---
 
@@ -61,15 +61,15 @@ A detective control was configured to record object access events.
 
 **Audit Object Access enabled**
 
-![Audit Object Access enabled](./images/detective-audit-object-access.png)
+![Audit Object Access enabled](./images/audit-object-access-policy.png)
 
 **File auditing configuration**
 
-![File auditing configuration](./images/detective-file-auditing.png)
+![File auditing configuration](./images/labfiles-auditing-settings.png)
 
 **Event Viewer showing object deletion audit**
 
-![Event Viewer showing object deletion audit](./images/detective-event-viewer-4663.png)
+![Event Viewer showing object deletion audit](./images/event-viewer-object-deletion.png)
 
 ---
 
@@ -83,7 +83,7 @@ A directive control was configured to communicate organizational security requir
 
 **Login warning banner**
 
-![Login warning banner](./images/directive-login-banner.png)
+![Login warning banner](./images/login-warning-banner.png)
 
 ---
 
