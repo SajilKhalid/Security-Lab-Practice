@@ -90,16 +90,6 @@ Analyzed the attack surface of an internal Windows server from the client networ
 
 ---
 
-### Network Interface Verification
-
-Verified the workstation successfully obtained a new IP configuration after changing network segments.
-
-**Network interface configuration**
-
-![Network interface configuration](./images/network-interface-configuration.png)
-
----
-
 ## Results
 
 Successfully performed reconnaissance and service enumeration against systems from multiple network locations.
