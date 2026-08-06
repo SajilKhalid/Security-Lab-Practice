@@ -46,7 +46,7 @@ Submitted the SHA1 hash to MetaDefender Cloud to identify the file and review de
 
 **Screenshot**
 
-![MetaDefender Results](./images/02-metadefender-results.png)
+![MetaDefender Results](./images/02-metadefender-analysis.png)
 
 ---
 
@@ -56,7 +56,7 @@ Viewed the password entries stored in `/etc/shadow` to observe how Linux stores 
 
 **Screenshot**
 
-![Linux Salted Password Hashes](./images/03-shadow-password-hashes.png)
+![Linux Salted Password Hashes](./images/03-linux-shadow-password-hashes.png)
 
 ---
 
@@ -76,7 +76,7 @@ Used John the Ripper to crack the unsalted password hash. Because no salt was pr
 
 **Screenshot**
 
-![John Cracking Unsalted Hash](./images/05-john-unsalted-crack.png)
+![John Cracking Unsalted Hash](./images/06-john-unsalted-crack.png)
 
 ---
 
@@ -86,7 +86,7 @@ Generated a new password hash using the salt value `SALT` and verified that the 
 
 **Screenshot**
 
-![Salted Password Hash](./images/06-salted-password-hash.png)
+![Salted Password Hash](./images/05-salted-password-hash.png)
 
 ---
 
@@ -96,7 +96,7 @@ Removed the visible salt from the hash and launched John the Ripper against the 
 
 **Screenshot**
 
-![John Brute Force Without Salt Information](./images/07-john-salted-hash.png)
+![John Brute Force Without Salt Information](./images/07-john-salted-crack-status.png)
 
 ---
 
