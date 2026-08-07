@@ -1,222 +1,140 @@
 # Managing Password Security
 
-## Overview
+## Lab Overview
 
-This lab explores common password attack techniques and demonstrates how organizations can improve password security through stronger authentication policies.
+**Lab Name:** Managing Password Security  
+**Platform:** Kali Linux, MS10 Windows Server 2016, DC10 Windows Server 2019  
+**Category:** Identity and Access Management (IAM) / Password Security  
 
-The exercises covered:
+## Objective
+
+The goal of this lab was to understand common password attack techniques and implement stronger password security controls. The exercises demonstrated:
 
 - Password spraying attacks
 - Dictionary-based password cracking
-- Brute force password cracking
+- Brute-force password cracking
 - Domain password policy improvements
 
-The lab environment included:
-
-- **KALI** — Kali Linux attack workstation
-- **MS10** — Windows Server 2016 target system
-- **DC10** — Windows Server 2019 Domain Controller
+These techniques demonstrate why organizations must implement strong password policies, account lockout controls, and secure authentication practices.
 
 ---
 
-# Objectives
+# Lab Tasks
 
-- Understand how password spraying attacks work
-- Perform offline password cracking using dictionary attacks
-- Perform offline password cracking using brute force attacks
-- Analyze password security weaknesses
-- Configure stronger Active Directory password policies
+## 1. Password Spraying Attack
 
----
+### Overview
 
-# Tools Used
+Password spraying attempts to authenticate using a small list of known passwords against many user accounts. Unlike traditional brute force attacks, password spraying attempts to avoid account lockout protections by limiting login attempts per account.
 
-- Kali Linux
-- Hydra
-- John the Ripper
-- NTLM password hashes
-- Active Directory PowerShell module
+The lab used:
+
+- A list of discovered usernames
+- A small password list
+- Hydra to automate SMB authentication attempts
 
 ---
 
-# Lab 1: Password Spraying Attack
+### Screenshot 01 - Password Spray Setup
 
-## Description
-
-A password spraying attack attempts a small number of commonly used passwords against many user accounts.
-
-Unlike brute force attacks that attempt many passwords against one account, password spraying attempts to avoid account lockout by using a limited number of passwords across multiple accounts.
-
----
-
-## Creating Password Spray Files
-
-Created a password list containing commonly discovered passwords:
-
-- abc123
-- 123456
-- Pa$$w0rd
-
-Created the password file:
-
-```bash
-echo abc123 > pass.txt
-echo 123456 >> pass.txt
-echo 'Pa$$w0rd' >> pass.txt
-```
-
-Screenshot:
+Created the mount point and reviewed the available user accounts before beginning password spraying.
 
 ![Password Spray Setup](./images/01-passwordspray-setup.png)
 
 ---
 
-## Running Hydra Password Spray Attack
+### Screenshot 02 - Hydra Password Spray
 
-Used Hydra to perform an SMB password spraying attack against the MS10 system.
+Used Hydra to perform an automated password spraying attack against the SMB share.
 
-Command:
+The attack successfully identified valid credentials.
 
-```bash
-hydra-wizard
+![Hydra Password Spray](./images/02-Hydra-passwordspray.png)
+
+---
+
+### Screenshot 03 - Share Mounted
+
+Used discovered credentials to successfully mount the HR network share and verify access.
+
+![Share Mounted](./images/03-share-mounted.png)
+
+---
+
+# 2. Dictionary Password Cracking
+
+## Overview
+
+Dictionary attacks are offline password attacks that compare password hashes against large lists of commonly used passwords.
+
+John the Ripper was used with an NTLM password hash file and a password dictionary.
+
+Command used:
+
 ```
-
-Configuration:
-
-- Service: SMB
-- Target: 10.1.16.2
-- Username file: users.txt
-- Password file: pass.txt
-
-Hydra successfully identified accounts using weak shared passwords.
-
-Screenshot:
-
-![Hydra Password Spray Results](./images/02-hydra-passwordspray.png)
-
----
-
-## Verifying Discovered Credentials
-
-Mounted the HR share using discovered credentials:
-
-```bash
-mount //10.1.16.2/HR /mnt/HR -o username=jaime
-```
-
-Successfully accessed the shared directory.
-
-Screenshot:
-
-![Mounted HR Share](./images/03-share-mounted.png)
-
----
-
-# Lab 2: Dictionary Password Cracking
-
-## Description
-
-Dictionary attacks are offline password attacks where stolen password hashes are compared against large password lists.
-
-Unlike online attacks, offline attacks are not limited by account lockout policies.
-
----
-
-## Viewing Password Hashes
-
-Displayed extracted NTLM password hashes:
-
-```bash
-cat ms10-hashes.txt
-```
-
-Screenshot:
-
-![NTLM Hash File](./images/04-dictionary-crack.png)
-
----
-
-## Running John the Ripper Dictionary Attack
-
-Used the SecLists password dictionary:
-
-```bash
 john --format=NT --wordlist=/usr/share/seclists/Passwords/xato-net-10-million-passwords.txt ms10-hashes.txt
 ```
 
-John successfully cracked multiple weak passwords.
+---
 
-Screenshot:
+### Screenshot 04 - Dictionary Crack
 
-![Dictionary Attack Results](./images/05-dictionary-results.png)
+Executed John the Ripper dictionary-based password cracking against the collected NTLM hashes.
+
+![Dictionary Crack](./images/04-dictionary-crack.png)
 
 ---
 
-## Exporting Cracked Passwords
+### Screenshot 05 - Dictionary Results
 
-Saved cracked passwords:
+Reviewed the passwords successfully recovered from the dictionary attack.
 
-```bash
-john --show --format=NT ms10-hashes.txt > dict-cracked.txt
+![Dictionary Results](./images/05-dictionary-results.png)
+
+---
+
+# 3. Brute Force Password Cracking
+
+## Overview
+
+A brute-force attack attempts every possible character combination until the correct password is discovered.
+
+John the Ripper was configured for incremental brute-force cracking.
+
+Command used:
+
 ```
-
-Viewed results:
-
-```bash
-less dict-cracked.txt
-```
-
-Screenshot:
-
-![Dictionary Cracked Passwords](./images/06-bruteforce-status.png)
-
----
-
-# Lab 3: Brute Force Password Cracking
-
-## Description
-
-A brute force attack attempts every possible character combination until the correct password is discovered.
-
-Password complexity and length significantly increase resistance against brute force attacks.
-
----
-
-## Clearing Previous John Results
-
-Removed previous John password cache:
-
-```bash
-rm ~/.john/john.pot
-```
-
----
-
-## Running Brute Force Attack
-
-Started incremental brute force cracking:
-
-```bash
 john --format=NT --incremental ms10-hashes.txt
 ```
 
-The attack was allowed to run and progress was monitored.
-
-Screenshot:
-
-![Brute Force Attack](./images/07-password-policy-after.png)
+Longer and more complex passwords required significantly more time to crack.
 
 ---
 
-# Lab 4: Domain Password Policy Hardening
+### Screenshot 06 - Brute Force Status
 
-## Description
+Captured John the Ripper brute-force progress and status output.
 
-After evaluating password weaknesses, the Active Directory password policy was strengthened.
+![Brute Force Status](./images/06-bruteforce-status.png)
 
-Changes implemented:
+---
 
-| Setting | New Value |
+# 4. Implementing Stronger Password Policies
+
+## Overview
+
+After analyzing weaknesses through password attacks, the domain password policy was strengthened.
+
+The following security improvements were implemented:
+
+- Increased minimum password length
+- Increased password age requirements
+- Enabled account lockout protections
+- Reduced password attack opportunities
+
+Updated settings included:
+
+| Policy Setting | New Value |
 |---|---|
 | Lockout Observation Window | 15 minutes |
 | Lockout Duration | 15 minutes |
@@ -227,98 +145,76 @@ Changes implemented:
 
 ---
 
-## Viewing Updated Password Policy
+### Screenshot 07 - Password Policy After
 
-The domain password policy was displayed using:
+Verified the updated Active Directory password policy settings after configuration changes.
 
-```powershell
-Get-ADDefaultDomainPasswordPolicy
-```
-
-Screenshot:
-
-![Updated Domain Password Policy](./images/08-password-policy-updated.png)
+![Password Policy After](./images/07-password-policy-after.png)
 
 ---
 
-# Security Concepts Learned
+# Key Security Concepts Learned
 
 ## Password Spraying
 
-Password spraying attempts:
-
-- A small list of known passwords
-- Against many different accounts
-
-Primary goal:
-
-- Avoid account lockout
-- Identify weak credentials
-
-**Security controls:**
-
-- Strong password policies
-- MFA
-- Account lockout thresholds
-- Password monitoring
+- Uses a small number of passwords against many accounts
+- Attempts to bypass account lockout protections
+- Mitigations:
+  - Strong password policies
+  - MFA
+  - Account lockout monitoring
+  - User awareness training
 
 ---
 
 ## Dictionary Attacks
 
-Dictionary attacks compare password hashes against known password lists.
-
-Success depends on:
-
-- Password appearing in the dictionary
-- Weak password selection
-- Poor password complexity
-
-**Security controls:**
-
-- Longer passwords
-- Password screening
-- MFA
-- Strong hashing algorithms
+- Uses lists of commonly used passwords
+- Requires access to password hashes
+- Offline attack method
+- Mitigations:
+  - Strong passwords
+  - Password complexity
+  - Password managers
+  - Secure hashing algorithms
 
 ---
 
 ## Brute Force Attacks
 
-Brute force attacks attempt every possible password combination.
-
-Resistance improves with:
-
-- Increased password length
-- Greater complexity
-- Strong hashing algorithms
+- Attempts every possible password combination
+- Password length is a major defense
+- Longer passwords exponentially increase cracking time
 
 ---
 
-# Key Takeaways
+## Password Policy Improvements
 
-- Password spraying targets many accounts with a small password set.
-- Dictionary attacks rely on previously known password lists.
-- Brute force attacks become exponentially harder as password length increases.
-- Offline attacks are dangerous because they bypass account lockout controls.
-- Strong password policies reduce the success rate of password attacks.
-- Organizations should implement MFA and strong identity controls.
+Strong password policies should include:
+
+- Long minimum password length
+- Account lockout controls
+- Protection against reused passwords
+- Multi-factor authentication
+- Monitoring for suspicious login activity
 
 ---
 
 # CompTIA Security+ Objectives Covered
 
-## 2.4
-Analyze indicators of malicious activity.
+- **2.4:** Analyze indicators of malicious activity
+- **2.5:** Explain mitigation techniques used to secure the enterprise
+- **4.6:** Implement and maintain identity and access management
+- **5.1:** Summarize elements of effective security governance
+- **5.6:** Implement security awareness practices
 
-## 2.5
-Explain mitigation techniques used to secure the enterprise.
+---
 
-## 4.6
-Implement and maintain identity and access management.
+# Tools Used
 
-## 5.1
-Summarize elements of effective security governance.
-
-## 5.6
-Implement security awareness practices.
+- Kali Linux
+- Hydra
+- John the Ripper
+- SMB
+- Active Directory PowerShell Module
+- Windows Server Domain Policy Management
