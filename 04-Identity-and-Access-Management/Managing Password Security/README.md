@@ -49,7 +49,7 @@ Used Hydra to perform an automated password spraying attack against the SMB shar
 
 The attack successfully identified valid credentials.
 
-![Hydra Password Spray](./images/02-Hydra-passwordspray.png)
+![Hydra Password Spray](./images/02-hydra-passwordspray.png)
 
 ---
 
