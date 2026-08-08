@@ -56,7 +56,7 @@ This means:
 * Group: Read
 * Others: Read
 
-![Initial Linux Permissions](./01-linux-permissions-initial.png)
+![Initial Linux Permissions](./images/01-linux-permissions-initial.png)
 
 ### Modifying Permissions with chmod
 
@@ -77,7 +77,7 @@ chmod 654 testfile.txt
 chmod 644 testfile.txt
 ```
 
-![Linux chmod Permissions](./02-linux-permissions-chmod.png)
+![Linux chmod Permissions](./images/02-linux-permissions-chmod.png)
 
 ### Configuring demofile.sh
 
@@ -105,7 +105,7 @@ The resulting permissions provide:
 * Group: Execute
 * Others: No permissions
 
-![demofile.sh Permissions](./03-linux-demofile-permissions.png)
+![demofile.sh Permissions](./images/03-linux-demofile-permissions.png)
 
 The script was then executed and inspected using:
 
@@ -144,7 +144,7 @@ The resulting permissions were then verified with:
 icacls .\comptia-logo.jpg
 ```
 
-![NTFS Deny Permission](./04a-ntfs-permissions-deny.png)
+![NTFS Deny Permission](./images/04a-ntfs-permissions-deny.png)
 
 ### Granting and Removing Permissions
 
@@ -166,7 +166,7 @@ The final permissions were verified using:
 icacls .\comptia-logo.jpg
 ```
 
-![NTFS Grant and Remove Permissions](./04b-ntfs-permissions-grant-remove.png)
+![NTFS Grant and Remove Permissions](./images/04b-ntfs-permissions-grant-remove.png)
 
 Removing a user's specific NTFS permission entry does not necessarily remove all access. The user may still receive permissions through membership in other groups.
 
@@ -182,7 +182,7 @@ The Effective Access tool was accessed through:
 
 The `dylan` user was selected and the effective permissions were displayed.
 
-![Windows Effective Access](./05-effective-access.png)
+![Windows Effective Access](./images/05-effective-access.png)
 
 Effective Access considers factors such as:
 
@@ -229,7 +229,7 @@ Change permission was granted to `dylan`:
 Grant-SmbShareAccess -Name "LABFILES" -AccountName "dylan" -AccessRight Change
 ```
 
-![Windows Share Permissions](./06-share-permissions.png)
+![Windows Share Permissions](./images/06-share-permissions.png)
 
 ### Removing Share Permissions
 
@@ -241,7 +241,7 @@ Revoke-SmbShareAccess -Name "LABFILES" -AccountName "dylan"
 
 The resulting share permissions were then verified.
 
-![Windows Share Permissions Removed](./07-share-permissions-removed.png)
+![Windows Share Permissions Removed](./images/07-share-permissions-removed.png)
 
 ---
 
