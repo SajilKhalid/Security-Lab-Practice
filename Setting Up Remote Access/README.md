@@ -22,19 +22,19 @@ In this lab, I configured and tested remote access technologies between Windows 
 
 I configured PC10 to allow Remote Desktop connections and added the Rene account to the Remote Desktop Users group.
 
-![RDP Configuration](./01-rdp-configuration.png)
+![RDP Configuration](./images/01-rdp-configuration.png)
 
 ### Connect to PC10 from DC10
 
 From DC10, I opened Remote Desktop Connection and connected to PC10 using the Rene account.
 
-![RDP Connection](./02-rdp-connection.png)
+![RDP Connection](./images/02-rdp-connection.png)
 
 ### Verify PC10 Network Configuration
 
 After connecting to PC10 through Remote Desktop, I opened Command Prompt and used `ipconfig` to view the system's network configuration.
 
-![PC10 IP Configuration](./03-pc10-ipconfig.png)
+![PC10 IP Configuration](./images/03-pc10-ipconfig.png)
 
 ---
 
@@ -48,7 +48,7 @@ I used the following command to verify that the OpenSSH server was already insta
 
 The output showed `[installed, automatic]`, confirming that OpenSSH was installed.
 
-![SSH Installation](./04-ssh-installed.png)
+![SSH Installation](./images/04-ssh-installed.png)
 
 ### Verify SSH Password Authentication
 
@@ -58,7 +58,7 @@ I checked the SSH configuration file using:
 
 The output showed the commented `PasswordAuthentication yes` configuration. This indicates that password authentication is accepted by default when no other authentication method overrides it.
 
-![SSH Configuration](./05-ssh-configuration.png)
+![SSH Configuration](./images/05-ssh-configuration.png)
 
 ### Verify the SSH Service
 
@@ -68,7 +68,7 @@ I used:
 
 The output confirmed that the SSH service was active and running and that the server was listening on port 22.
 
-![SSH Service Status](./06-ssh-status.png)
+![SSH Service Status](./images/06-ssh-status.png)
 
 ### Determine Kali's IP Address
 
@@ -78,7 +78,7 @@ I used:
 
 to determine the IPv4 address assigned to Kali's `eth0` interface.
 
-![Kali IP Address](./07-kali-ip.png)
+![Kali IP Address](./images/07-kali-ip.png)
 
 ---
 
@@ -94,7 +94,7 @@ From PC10, I opened PuTTY and configured an SSH connection to Kali using:
 
 I accepted the PuTTY security alert and authenticated using the `root` account.
 
-![PuTTY SSH Connection](./08-putty-connection.png)
+![PuTTY SSH Connection](./images/08-putty-connection.png)
 
 After connecting, I used:
 
@@ -118,7 +118,7 @@ From Windows Command Prompt, I initiated an SSH connection to Kali using:
 
 I authenticated using the root account password and successfully established the SSH session.
 
-![CLI SSH Connection](./09-ssh-cli.png)
+![CLI SSH Connection](./images/09-ssh-cli.png)
 
 ### Suppress the SSH Welcome Message
 
@@ -128,7 +128,7 @@ I created the `.hushlogin` file using:
 
 The `.hushlogin` file suppresses the standard SSH login/welcome message.
 
-![SSH Hushlogin](./10-ssh-hushlogin.png)
+![SSH Hushlogin](./images/10-ssh-hushlogin.png)
 
 After exiting the SSH session and reconnecting, the standard welcome message was no longer displayed.
 
